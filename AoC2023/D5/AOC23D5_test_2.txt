@@ -1,0 +1,320 @@
+----- ACTUAL CONVERSIONS -----
+
+
+CHANGE SEGMENT: seed-to-soil
+
+current seedstate: [('cur', 79, 92), ('cur', 55, 67)]   seed
+
+conversion row:    [50, (98, 99)] seed-to-soil
+
+Seed - (79, 92) - (98, 99) conversion
+no conversion
+Seed - (55, 67) - (98, 99) conversion
+no conversion
+
+new seedstate:     [('cur', 79, 92), ('cur', 55, 67)]   soil
+
+------------------------------
+
+current seedstate: [('cur', 79, 92), ('cur', 55, 67)]   seed
+
+conversion row:    [52, (50, 97)] seed-to-soil
+
+Seed - (79, 92) - (50, 97) conversion
+seed is fully in range
+Seed - (55, 67) - (50, 97) conversion
+seed is fully in range
+
+new seedstate:     [('new', 81, 94), ('new', 57, 69)]   soil
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 79, 92), ('cur', 55, 67)] seed (OLD)
+        [('cur', 81, 94), ('cur', 57, 69)] soil (NEW)
+
+******************************
+CHANGE SEGMENT: soil-to-fertilizer
+
+current seedstate: [('cur', 81, 94), ('cur', 57, 69)]   soil
+
+conversion row:    [0, (15, 51)] soil-to-fertilizer
+
+Seed - (81, 94) - (15, 51) conversion
+no conversion
+Seed - (57, 69) - (15, 51) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('cur', 57, 69)]   fertilizer
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('cur', 57, 69)]   soil
+
+conversion row:    [37, (52, 53)] soil-to-fertilizer
+
+Seed - (81, 94) - (52, 53) conversion
+no conversion
+Seed - (57, 69) - (52, 53) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('cur', 57, 69)]   fertilizer
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('cur', 57, 69)]   soil
+
+conversion row:    [39, (0, 14)] soil-to-fertilizer
+
+Seed - (81, 94) - (0, 14) conversion
+no conversion
+Seed - (57, 69) - (0, 14) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('cur', 57, 69)]   fertilizer
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 81, 94), ('cur', 57, 69)] soil (OLD)
+        [('cur', 81, 94), ('cur', 57, 69)] fertilizer (NEW)
+
+******************************
+CHANGE SEGMENT: fertilizer-to-water
+
+current seedstate: [('cur', 81, 94), ('cur', 57, 69)]   fertilizer
+
+conversion row:    [49, (53, 60)] fertilizer-to-water
+
+Seed - (81, 94) - (53, 60) conversion
+no conversion
+Seed - (57, 69) - (53, 60) conversion
+seed pokes right
+
+new seedstate:     [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  water 
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  fertilizer
+
+conversion row:    [0, (11, 52)] fertilizer-to-water
+
+Seed - (81, 94) - (11, 52) conversion
+no conversion
+Seed - (61, 69) - (11, 52) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  water 
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  fertilizer
+
+conversion row:    [42, (0, 6)] fertilizer-to-water
+
+Seed - (81, 94) - (0, 6) conversion
+no conversion
+Seed - (61, 69) - (0, 6) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  water 
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  fertilizer
+
+conversion row:    [57, (7, 10)] fertilizer-to-water
+
+Seed - (81, 94) - (7, 10) conversion
+no conversion
+Seed - (61, 69) - (7, 10) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('new', 53, 56), ('cur', 61, 69)]  water 
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 81, 94), ('cur', 57, 69)] fertilizer (OLD)
+        [('cur', 81, 94), ('cur', 53, 56), ('cur', 61, 69)] water (NEW)       
+
+******************************
+CHANGE SEGMENT: water-to-light
+
+current seedstate: [('cur', 81, 94), ('cur', 53, 56), ('cur', 61, 69)]  water 
+
+conversion row:    [88, (18, 24)] water-to-light
+
+Seed - (81, 94) - (18, 24) conversion
+no conversion
+Seed - (53, 56) - (18, 24) conversion
+no conversion
+Seed - (61, 69) - (18, 24) conversion
+no conversion
+
+new seedstate:     [('cur', 81, 94), ('cur', 53, 56), ('cur', 61, 69)]  light 
+
+------------------------------
+
+current seedstate: [('cur', 81, 94), ('cur', 53, 56), ('cur', 61, 69)]  water 
+
+conversion row:    [18, (25, 94)] water-to-light
+
+Seed - (81, 94) - (25, 94) conversion
+seed is fully in range
+Seed - (53, 56) - (25, 94) conversion
+seed is fully in range
+Seed - (61, 69) - (25, 94) conversion
+seed is fully in range
+
+new seedstate:     [('new', 74, 87), ('new', 46, 49), ('new', 54, 62)]  light 
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 81, 94), ('cur', 53, 56), ('cur', 61, 69)] water (OLD)       
+        [('cur', 74, 87), ('cur', 46, 49), ('cur', 54, 62)] light (NEW)       
+
+******************************
+CHANGE SEGMENT: light-to-temperature
+
+current seedstate: [('cur', 74, 87), ('cur', 46, 49), ('cur', 54, 62)]  light 
+
+conversion row:    [45, (77, 99)] light-to-temperature
+
+Seed - (74, 87) - (77, 99) conversion
+seed pokes left
+Seed - (46, 49) - (77, 99) conversion
+no conversion
+Seed - (74, 76) - (77, 99) conversion
+no conversion
+
+new seedstate:     [('new', 45, 55), ('cur', 46, 49), ('cur', 74, 76), ('cur', 54, 62)]       temperature
+
+------------------------------
+
+current seedstate: [('new', 45, 55), ('cur', 46, 49), ('cur', 74, 76), ('cur', 54, 62)]       light
+
+conversion row:    [81, (45, 63)] light-to-temperature
+
+Seed - (46, 49) - (45, 63) conversion
+seed is fully in range
+Seed - (74, 76) - (45, 63) conversion
+no conversion
+Seed - (54, 62) - (45, 63) conversion
+seed is fully in range
+
+new seedstate:     [('new', 45, 55), ('new', 82, 85), ('cur', 74, 76), ('new', 90, 98)]       temperature
+
+------------------------------
+
+current seedstate: [('new', 45, 55), ('new', 82, 85), ('cur', 74, 76), ('new', 90, 98)]       light
+
+conversion row:    [68, (64, 76)] light-to-temperature
+
+Seed - (74, 76) - (64, 76) conversion
+seed is fully in range
+
+new seedstate:     [('new', 45, 55), ('new', 82, 85), ('new', 78, 80), ('new', 90, 98)]       temperature
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 74, 87), ('cur', 46, 49), ('cur', 54, 62)] light (OLD)       
+        [('cur', 45, 55), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)] temperature (NEW)
+
+******************************
+CHANGE SEGMENT: temperature-to-humidity
+
+current seedstate: [('cur', 45, 55), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)]       temperature
+
+conversion row:    [0, (69, 69)] temperature-to-humidity
+
+Seed - (45, 55) - (69, 69) conversion
+no conversion
+Seed - (82, 85) - (69, 69) conversion
+no conversion
+Seed - (78, 80) - (69, 69) conversion
+no conversion
+Seed - (90, 98) - (69, 69) conversion
+no conversion
+
+new seedstate:     [('cur', 45, 55), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)]       humidity
+
+------------------------------
+
+current seedstate: [('cur', 45, 55), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)]       temperature
+
+conversion row:    [1, (0, 68)] temperature-to-humidity
+
+Seed - (45, 55) - (0, 68) conversion
+seed is fully in range
+Seed - (82, 85) - (0, 68) conversion
+no conversion
+Seed - (78, 80) - (0, 68) conversion
+no conversion
+Seed - (90, 98) - (0, 68) conversion
+no conversion
+
+new seedstate:     [('new', 46, 56), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)]       humidity
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 45, 55), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)] temperature (OLD)
+        [('cur', 46, 56), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)] humidity (NEW)
+
+******************************
+CHANGE SEGMENT: humidity-to-location
+
+current seedstate: [('cur', 46, 56), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)]       humidity
+
+conversion row:    [60, (56, 92)] humidity-to-location
+
+Seed - (46, 56) - (56, 92) conversion
+seed pokes left
+Seed - (82, 85) - (56, 92) conversion
+seed is fully in range
+Seed - (78, 80) - (56, 92) conversion
+seed is fully in range
+Seed - (46, 55) - (56, 92) conversion
+no conversion
+
+new seedstate:     [('new', 60, 60), ('new', 86, 89), ('new', 82, 84), ('cur', 46, 55), ('cur', 90, 98)]      location
+
+------------------------------
+
+current seedstate: [('new', 60, 60), ('new', 86, 89), ('new', 82, 84), ('cur', 46, 55), ('cur', 90, 98)]      humidity
+
+conversion row:    [56, (93, 96)] humidity-to-location
+
+Seed - (46, 55) - (93, 96) conversion
+no conversion
+Seed - (90, 98) - (93, 96) conversion
+no conversion
+
+new seedstate:     [('new', 60, 60), ('new', 86, 89), ('new', 82, 84), ('cur', 46, 55), ('cur', 90, 98)]      location
+
+------------------------------
+
+******************************
+
+        Summary Changes:
+        [('cur', 46, 56), ('cur', 82, 85), ('cur', 78, 80), ('cur', 90, 98)] humidity (OLD)
+        [('cur', 60, 60), ('cur', 86, 89), ('cur', 82, 84), ('cur', 46, 55), ('cur', 90, 98)] location (NEW)
+
+******************************
+46
+PS C:\Users\ChunChunMaru\Desktop\Baby code\FeetV2\AoC\AoC2023\D5> 
