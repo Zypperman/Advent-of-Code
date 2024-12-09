@@ -64,8 +64,8 @@ import os
 
 dirname = os.path.dirname(__file__) + "\\\\"
 
-filename = dirname + "AOC{Year[2:]}D{Day}{scriptnames[1]}"
-test = dirname + "AOC{Year[2:]}D{Day}{scriptnames[2]}"
+test = dirname + "AOC{Year[2:]}D{Day}{scriptnames[1]}"
+test1 = dirname + "AOC{Year[2:]}D{Day}{scriptnames[2]}"
 test2 = dirname + "AOC{Year[2:]}D{Day}{scriptnames[3]}"
 
 def process_data(RD):
@@ -93,7 +93,7 @@ def problem{Day}_1(filename):
 
     return thing
 
-print(problem{Day}_1(filename))
+print(problem{Day}_1(test))
 """
 
 # * 4 - create problem 1 script file
@@ -110,8 +110,8 @@ import os
 
 dirname = os.path.dirname(__file__) + "\\\\"
 
-filename = dirname + "AOC{Year[2:]}D{Day}{scriptnames[1]}"
-test = dirname + "AOC{Year[2:]}D{Day}{scriptnames[2]}"
+test = dirname + "AOC{Year[2:]}D{Day}{scriptnames[1]}"
+test1 = dirname + "AOC{Year[2:]}D{Day}{scriptnames[2]}"
 test2 = dirname + "AOC{Year[2:]}D{Day}{scriptnames[3]}"
 
 def process_data(RD):
@@ -139,7 +139,7 @@ def problem{Day}_2(filename):
 
     return thing
 
-print(problem{Day}_2(filename))
+print(problem{Day}_2(test))
 """
 
 # * 4 - create problem 1 script file
