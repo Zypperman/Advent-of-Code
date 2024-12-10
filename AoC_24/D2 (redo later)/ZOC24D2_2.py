@@ -26,10 +26,10 @@ dirname = os.path.dirname(__file__) + "\\"
 
 test = dirname + "AOC24D2_input.txt"
 test1 = dirname + "AOC24D2_test_1.txt"
-test2 = dirname + "AOC24D2_test2.txt"
-test3 = r"C:\Users\ChunChunMaru\Desktop\Baby code\FeetV2\Advent-of-Code\AoC_24\D2\AOC24D2_test_3.txt"
-test4 = r"C:\Users\ChunChunMaru\Desktop\Baby code\FeetV2\Advent-of-Code\AoC_24\D2\AOC24D2_test_4.txt"
-test5 = r"C:\Users\ChunChunMaru\Desktop\Baby code\FeetV2\Advent-of-Code\AoC_24\D2\AOC24D2_test_5.txt"
+test2 = dirname + "AOC24D2_test_2.txt"
+test3 = dirname + "AOC24D2_test_3.txt"
+test4 = dirname + "AOC24D2_test_4.txt"
+test5 = dirname + "AOC24D2_test_5.txt"
 
 
 def process_data(RD):
@@ -52,80 +52,78 @@ def problem2_2(filename):
     # print(f"data looks like:\n{var_name}")
     # ? Dump solution here
 
-    safecounter = 0
-    for report in var_name:
-        # print()
-        # print(report)
-
-        if len(report) < 3:
-            safe += 1
-            continue
-
-        report = [int(i) for i in report.split(" ")]
-        # check if first and last 2 elements are descending or not
+    def ascending_or_descending(report):
         front_check = report[1] - report[0]
         back_check = report[-1] - report[-2]
 
-        # lambdas to check if safe range is positive or negative, and in [1,2,3]
         increasing_checker = lambda x, y: bool(-(x - y) in (range(1, 3 + 1)))
         decreasing_checker = lambda x, y: bool((x - y) in range(1, 3 + 1))
-        issafe = None  # for initialization
 
-        if front_check > 0 and back_check > 0:
+        if front_check > 0 and back_check > 0 or (front_check == 0 and back_check == 0):
             issafe = increasing_checker
         elif front_check < 0 and back_check < 0:
             issafe = decreasing_checker
-        elif (
-            front_check == 0 and back_check == 0
-        ):  # edge case, if both 0 then alr unsafe
-            continue
         else:  # for if first or last element needs to swap
             middle_check = report[len(report) // 2] - report[0]
             if middle_check > 0:
                 issafe = increasing_checker
             else:
                 issafe = decreasing_checker
+        return issafe
 
+    safecounter = 0
+    global_safe = False
+    for report in var_name:
+        text = report
+        report = [int(i) for i in report.split(" ")]
+        issafe = ascending_or_descending(report)  # for initialization
         safe = True
-        pruned = True
-        i = 0
-        while i in range(len(report) - 1):
+        # get first error if any
+        for i in range(len(report) - 2):
             if not issafe(report[i], report[i + 1]):
-                if pruned:
-                    safe = False
+                safe = False
+                isolate = i
+                break
+
+        if safe:
+            print("no edits required, pass")
+            safecounter += 1
+            continue
+
+        print()
+        print(text)
+        print("isolated term:", f"item {isolate}", report[isolate])
+
+        remove_candidates = [0, len(report) - 1, isolate, isolate + 1]
+        labels = ["start", "end", "isolate", "isolate + 1"]
+        global_safe = False
+        for i in range(len(remove_candidates)):
+            localsafe = True
+            report_modded = report.copy()
+            report_modded.pop(remove_candidates[i])
+            issafe = ascending_or_descending(report_modded)
+
+            for j in range(len(report_modded) - 1):
+                if not issafe(report_modded[j], report_modded[j + 1]):
+                    print(
+                        f"unsafe at {labels[i]}, item {j}({report_modded[j]}) and item {j+1} ({report_modded[j+1]} (diff by {abs(report_modded[j] - report_modded[j+1])}))"
+                    )
+                    localsafe = False
                     break
 
-                sub1 = True
-                sub2 = True
-                report2 = report.copy()
-                report2.pop(i)
-                for j in range(len(report2) - 1):
-                    if not issafe(report2[j], report2[j + 1]):
-                        sub1 = False
-
-                if sub1 == True:
-                    pruned = True
-                    continue
-
-                report3 = report.copy()
-                report3.pop(i + 1)
-                for k in range(len(report3) - 1):
-                    if not issafe(report3[k], report3[k + 1]):
-                        sub2 = False
-
-                if sub2 == True:
-                    pruned = True
-                    i += 1
-                    continue
-
-            if safe == False:
+            if localsafe:
+                print("works at", labels[i])
+                global_safe = True
                 break
-            i += 1
-        if safe:
+
+            print("global safe is", global_safe)
+
+        if global_safe:
+            print("added to count")
             safecounter += 1
+            continue
 
     return safecounter
-
 
 print(problem2_2(test1))
 # actual: 439

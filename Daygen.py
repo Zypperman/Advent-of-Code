@@ -31,26 +31,25 @@ else:
     os.makedirs(foldername)
 
 
-
 scriptnames = [
     "AOC",
     "_input.txt",
-    "_test_1.txt",
+    "_test1.txt",
     "_test2.txt",
 ]
 
 # * 1 - create input dump file
-filename = foldername + f"\\AOC{Year[2:]}D{Day}_input.txt"
+filename = foldername + f"\\AOC{Year[2:]}D{Day}{scriptnames[1]}"
 with open(filename, "w") as f:
     f.write("Replace_with_input")
 
 # * 2 - create testcase1 dump file
-filename = foldername + f"\\AOC{Year[2:]}D{Day}_test_1.txt"
+filename = foldername + f"\\AOC{Year[2:]}D{Day}{scriptnames[2]}t"
 with open(filename, "w") as f:
     f.write("Replace_with_testinput1")
 
 # * 3 - create testcase2 dump file
-filename = foldername + f"\\AOC{Year[2:]}D{Day}_test2.txt"
+filename = foldername + f"\\AOC{Year[2:]}D{Day}{scriptnames[3]}"
 with open(filename, "w") as f:
     f.write("Replace_with_testinput2")
 
