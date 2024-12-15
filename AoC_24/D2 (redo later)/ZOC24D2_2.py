@@ -39,6 +39,16 @@ def process_data(RD):
 
 
 def problem2_2(filename):
+    """
+    brute force, check every array and see if theres a better combo 
+    (test all elements, the moment a report is unsafe just check if 
+    removing any of these makes the report safe :
+    - first element
+    - last element
+    - element at isolate
+    - element at isolate + 1
+    add to counter if criteria met.
+    """
     with open(filename) as f:
         r = f.read()
     r.strip()

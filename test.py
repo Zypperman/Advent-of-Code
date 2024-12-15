@@ -1,38 +1,35 @@
-report = "7 6 4 2 1"
+arr = [
+    ["M", "M", "M", "X"],
+    ["M", "M", "M", "X"],
+    ["M", "S", "A", "x"],
+    ["A", "M", "X", "X"],
+    ["M", "S", "A", "M"],
+    ["M", "S", "A", "M"],
+    ["M", "S", "A", "M"],
+    ["M", "S", "A", "M"],
+    ["M", "S", "A", "M"],
+    ["M", "S", "A", "M"],
+]
 
-trigger = True
-report = [int(i) for i in report.split(" ")]
-front_check = report[1] - report[0]
-back_check = report[-1] - report[-2]
-# for verifying if the list is ascending or descending without sorting
-# if the difference between the first two numbers is positive, the list is ascending
-if front_check > 0 and back_check > 0:
-    f = lambda x, y: bool(-(x - y) in (range(1, 3 + 1)))
-elif front_check <= 0 and back_check > 0:
-    f = lambda x, y: bool((x - y) in range(1, 3 + 1))
-else:
-    middle_check = report[len(report) // 2] - report[0]
-    if middle_check > 0:
-        f = lambda x, y: bool(-(x - y) in range(1, 3 + 1))
-    else:
-        f = lambda x, y: bool((x - y) in range(1, 3 + 1))
+# transpose
+# arr = [[arr[i][j] for i in range(len(arr))] for j in range(len(arr[0]))]
 
-print(report)
-for value in range(len(report) - 1):
+for i in arr:
+    print(i)
 
-    if not f(report[value], report[value + 1]):
-        if (value + 1) == len(report) - 1:
+print(" ", " ".join([str(i) for i in range(len(arr[0]))]), len(arr[0]))
+for i in range(len(arr)):
+    print(i, " ".join([str(j) for j in arr[i]]))
+print(len(arr))
 
-            continue
-        if not f(report[value], report[value + 2]):
 
-            trigger = False
-            break
-        else:
+test = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-            continue
+alt = [
+    [row[len(test[0]) - i - 1] for row in test]
+    for i in range(max(len(r) for r in test))
+]
 
-if trigger == False:
-    print("unsafe:", report)
-else:
-    print("safe")
+for i in alt:
+    print(i)
+new = []

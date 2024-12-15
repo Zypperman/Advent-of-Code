@@ -83,9 +83,9 @@ def problem{Day}_1(filename):
 
     # * processing data
     #! swap out with actual var names
-    var_name = process_data(Rawdata)
+    data = process_data(Rawdata)
     #* to test if code works, comment out when running input
-    print(f"data looks like:\\n{{var_name}}")
+    print(f"data looks like:\\n{{data}}")
     #? Dump solution here
 
     thing = 0
@@ -101,7 +101,7 @@ with open(filename, "w") as f:
     f.write(lazyconvert)
 
 lazyconvert = f"""\'\'\'
-def problem_{Day}_1():
+def problem_{Day}_2():
     Paste_qn_statement
 \'\'\'
 
@@ -115,9 +115,7 @@ test2 = dirname + "AOC{Year[2:]}D{Day}{scriptnames[3]}"
 
 def process_data(RD):
     # * dump data for processing here
-
     relevant_data = 0
-
     return RD #relevant_data
 
 def problem{Day}_2(filename):
@@ -129,9 +127,9 @@ def problem{Day}_2(filename):
 
     # * processing data
     #! swap out with actual var names
-    var_name = process_data(Rawdata)
+    data = process_data(Rawdata)
     #* to test if code works, comment out when running input
-    print(f"data looks like:\\n{{var_name}}")
+    print(f"data looks like:\\n{{data}}")
     #? Dump solution here
 
     thing = 0
