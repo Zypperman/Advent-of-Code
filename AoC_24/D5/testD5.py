@@ -1,138 +1,17 @@
-"""
-def problem_5_1():
-    --- Part Two ---
-While the Elves get to work printing the correctly-ordered updates, you have a little time to fix the rest of them.
+# test set
+nodes = ["0", "1", "2", "3", "4", "5", "6"]
 
-For each of the incorrectly-ordered updates, use the page ordering rules to put the page numbers in the right order. For the above example, here are the three incorrectly-ordered updates and their correct orderings:
-
-75,97,47,61,53 becomes 97,75,47,61,53.
-61,13,29 becomes 61,29,13.
-97,13,75,29,47 becomes 97,75,47,29,13.
-After taking only the incorrectly-ordered updates and ordering them correctly, their middle page numbers are 47, 29, and 47. Adding these together produces 123.
-
-Find the updates which are not in the correct order. What do you get if you add up the middle page numbers after correctly ordering just those updates?
-"""
-
-import os
-
-dirname = os.path.dirname(__file__) + "\\"
-
-test = dirname + "AOC24D5_input.txt"
-test1 = dirname + "AOC24D5_test1.txt"
-test2 = dirname + "AOC24D5_test2.txt"
-
-
-def process_data(RD):
-    # * dump data for processing here
-
-    index = 0
-    for i in RD:
-        if i == "":
-            break
-        index += 1
-
-    raw_rules, pages = RD[:index], RD[index + 1 :]
-
-    rules = {}
-    for i in raw_rules:
-        key, val = i.split("|")
-        if key not in rules.keys():
-            rules[key] = []
-        rules[key].append(val)
-
-    return (rules, pages)  # relevant_data
-
-
-def rev_toposort(nodes, adjlist):
-    # does dfs on all nodes, reverses them
-    # add elements with no outgoing edges first
-
-    fully_travelled = []
-
-    for node in nodes:
-        if node in fully_travelled:
-            continue
-
-        stack = [node]
-        final_len = len(fully_travelled)
-        while stack:
-            target = stack[-1]
-
-            if target in fully_travelled:
-                stack.pop()
-                continue
-            
-            if target not in adjlist.keys():
-                fully_travelled.append(stack.pop())
-                continue
-
-            exhausted = True
-
-            for neighbour in adjlist[target]:
-                if neighbour in nodes and neighbour not in fully_travelled:
-                    exhausted = False
-                    stack.append(neighbour)
-
-            if exhausted:
-                fully_travelled.append(stack.pop())
-
-    return fully_travelled[::-1]
-
-def problem5_2(filename):
-    with open(filename) as f:
-        r = f.read()
-    r.strip()
-
-    Rawdata = r.split("\n")
-
-    # * processing data
-    #! swap out with actual var names
-    rules, pages = process_data(Rawdata)
-    # * to test if code works, comment out when running input
-    # print(f"data looks like:\n{data}")
-    # for i in rules.items():
-    #    print(i)
-
-    # ? Dump solution here
-
-    midsum = 0
-
-    adjlist = rules.copy()
-    for i in adjlist.values():
-        i.sort(key=lambda x: -len(rules[x] if x in rules.keys() else []))
-
-    for page in pages:
-
-        page = page.split(",")
-        for i in page:
-            failed = False
-            # print(f"check for {i}")
-            self_index = page.index(i)
-            if i not in rules.keys():
-                # print("no restrictions")
-                continue
-            for j in rules[i]:
-                if j in page:
-                    # print(f"j ({j}) is in {page}")
-                    target_index = page.index(str(j))
-                else:
-                    target_index = len(page)
-                if target_index < self_index:
-                    failed = True
-                    break
-            if failed == True:
-                nodes = page.copy()
-                new_sort = rev_toposort(nodes, adjlist)
-
-                midsum += int(new_sort[::-1][len(new_sort) // 2])
-                break
-    return midsum
-
-print(problem5_2(test1))
-
-# 5280 too low
-# 61,64,66,41,12,69,86,93,85,38,95,46,39,99,92,81,97,16,23
-"""
+adjlist = {
+    "0": ["5", "2"],
+    "1": ["3", "6"],
+    "2": ["4"],
+    "3": ["5"],
+    "4": [],
+    "5": ["4", "2"],
+    "6": ["2"],
+}
+# """
+# actual data
 nodes = [
     "61",
     "64",
@@ -1581,34 +1460,52 @@ adjlist_items = [
 adjlist = {}
 for i in adjlist_items:
     adjlist[i[0]] = i[1]
-
-"""
+# """
 
 
 def rev_toposort(nodes, adjlist):
     # does dfs on all nodes, reverses them
     # add elements with no outgoing edges first
 
+    print("original")
+    print(nodes)
     fully_travelled = []
 
     for node in nodes:
+        print("=" * 15)
+        print(f"current node: {node}")
+
         if node in fully_travelled:
+            print(f"node in final set alr, at index {fully_travelled.index(node)}")
             continue
+
+        print("start dfs")
 
         stack = [node]
         final_len = len(fully_travelled)
         while stack:
+            print()
+            print("stack state")
+            print(stack)
             target = stack[-1]
+            print("target:", target)
 
             if target in fully_travelled:
+                print("target in final set alr, at index", fully_travelled.index(target))
                 stack.pop()
                 continue
             
             if target not in adjlist.keys():
+                print("end of a dfs or just no neighbours, can just add")
                 fully_travelled.append(stack.pop())
                 continue
 
             exhausted = True
+
+            print("possible neighbours:")
+            print(adjlist[target])
+            print("neighbours in nodes:")
+            print(list(set(adjlist[target]) & set(nodes)))
 
             for neighbour in adjlist[target]:
                 if neighbour in nodes and neighbour not in fully_travelled:
@@ -1616,9 +1513,53 @@ def rev_toposort(nodes, adjlist):
                     stack.append(neighbour)
 
             if exhausted:
+                print("end of dfs, backtracking")
                 fully_travelled.append(stack.pop())
+
+            if final_len < len(fully_travelled):
+                print()
+                final_len = len(fully_travelled)
+                print(fully_travelled)
+
+            print()
+            print("*" * 20)
+            print("FINAL CHECK ON ADDED ITEMS")
+            final = fully_travelled[::-1]
+            print(final)
+            print()
+
+            for i in final:
+                failed2 = False
+                # print(f"check for {i}")
+                self_index = final.index(i)
+
+                if i not in adjlist.keys():
+                    # print("no restrictions")
+                    continue
+                for j in adjlist[i]:
+                    if j in final:
+                        # print(f"j ({j}) is in {page}")
+                        target_index = final.index(str(j))
+                    else:
+                        target_index = len(final)
+                    if target_index < self_index:
+                        failed2 = True
+                        break
+                if failed2 == True:
+                    print("order failed")
+                    print("item", i, "failed with ruleset")
+                    print(adjlist[i])
+                    print("FAILED")
+                    exit()
+                else:
+                    print("shit's ok, move along")
+                    print("*" * 20)
+
+    print()
+    print("final:")
+    print(fully_travelled[::-1])
 
     return fully_travelled[::-1]
 
 
-# print(",".join(rev_toposort(nodes, adjlist)))
+print(",".join(rev_toposort(nodes, adjlist)))

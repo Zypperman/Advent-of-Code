@@ -130,16 +130,19 @@ def problem5_1(filename):
 
     # ? Dump solution here
 
-    failed = False
     midsum = 0
 
     for page in pages:
-        print(page)
+        # page = pages[54]
+        # print(page)
         page = page.split(",")
         for i in page:
+            failed = False
+            # print(f"check for {i}")
             self_index = page.index(i)
 
             if i not in rules.keys():
+                # print("no restrictions")
                 continue
             for j in rules[i]:
                 if j in page:
@@ -151,14 +154,17 @@ def problem5_1(filename):
                     failed = True
                     break
             if failed == True:
+                #print("order failed")
+                #print("item", i, "failed with ruleset")
+                #print(rules[i])
                 break
 
         if not failed:
-            print("add midnum:")
-            print(int(page[len(page) // 2]))
+            #print("add midnum:")
+            #print(int(page[len(page) // 2]))
             midsum += int(page[len(page) // 2])
 
     return midsum
 
 
-print(problem5_1(test1))
+print(problem5_1(test2))
