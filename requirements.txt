@@ -1,0 +1,3 @@
+# making this from scratch
+pytest == 9.0.1
+pytest-mock == 3.15.1

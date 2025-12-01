@@ -2,34 +2,32 @@ import os
 import datetime
 
 
-#! Code assumes that its in the folder where you wanna work in.
+# ! Code assumes that its in the folder where you wanna work in.
 
-# **Get Year and Date, leave blank if creating for current day
+# *Get Year and Date, leave blank if creating for current day
 Year = input("Enter Year (if current year, then leave blank)")
-Day = input("Enter Day  (if current Day,  then leave blank)")
+Day_input = input("Enter Day  (if current Day,  then leave blank)")
 
 Today = datetime.date.today()
-Year = str(Today).split("-")[0] if Year == "" else Year or Type(Year) != int
-Day = int(str(Today).split("-")[2]) if Day == "" else Day or int(Day) != int
-
+Year = str(Today).split("-")[0] if Year == "" else Year
+Day = int(str(Today).split("-")[2]) if Day_input == "" else int(Day_input)
 
 dirname = os.path.dirname(__file__)
 
 rootfoldername = dirname + "\\AoC_" + Year[2:]
 
 foldername = rootfoldername + f"\\D{Day}"
+testfoldername = foldername + "\\test"
 
 if not os.path.exists(rootfoldername):
     os.makedirs(rootfoldername)
-
-# print(f"The directory's name is {dirname}")
 
 if os.path.exists(foldername):
     print("Directory already exists, please make sure day has been completed.")
     exit()
 else:
     os.makedirs(foldername)
-
+    os.makedirs(testfoldername)
 
 scriptnames = [
     "AOC",
@@ -55,8 +53,9 @@ with open(filename, "w") as f:
 
 
 lazyconvert = f"""\'\'\'
-def problem_{Day}_1():
-    Paste_qn_statement
+AOC_{Year}_{Day}_1:
+
+Paste_qn_statement
 \'\'\'
 
 import os
@@ -85,7 +84,8 @@ def problem{Day}_1(filename):
     #! swap out with actual var names
     data = process_data(Rawdata)
     #* to test if code works, comment out when running input
-    print(f"data looks like:\\n{{data}}")
+    print(f"data looks like:")
+    print(data)
     #? Dump solution here
 
     thing = 0
@@ -129,7 +129,8 @@ def problem{Day}_2(filename):
     #! swap out with actual var names
     data = process_data(Rawdata)
     #* to test if code works, comment out when running input
-    print(f"data looks like:\\n{{data}}")
+    print(f"data looks like:")
+    print(data)
     #? Dump solution here
 
     thing = 0
